@@ -1,4 +1,36 @@
 import { Button } from "@/components/ui/button";
+import { useTextScramble } from "@/hooks/use-text-scramble";
+
+const ScrambleButton = ({ 
+  children, 
+  variant = "default", 
+  size = "default", 
+  className = "",
+  ...props 
+}: { 
+  children: string; 
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "accent";
+  size?: "default" | "sm" | "lg" | "icon";
+  className?: string;
+  [key: string]: any;
+}) => {
+  const { displayText, scramble, reset } = useTextScramble(children, {
+    revealSpeed: 30,
+  });
+
+  return (
+    <Button
+      variant={variant}
+      size={size}
+      className={className}
+      onMouseEnter={scramble}
+      onMouseLeave={reset}
+      {...props}
+    >
+      {displayText}
+    </Button>
+  );
+};
 
 const HowItWorksSection = () => {
   return (
@@ -17,9 +49,9 @@ const HowItWorksSection = () => {
               <p className="text-muted-foreground">
                 Browse a diverse range of both digital and blockchain products.
               </p>
-              <Button variant="default" size="lg" className="w-full sm:w-auto">
+              <ScrambleButton variant="default" size="lg" className="w-full sm:w-auto">
                 Start Exploring →
-              </Button>
+              </ScrambleButton>
             </div>
             <div className="flex gap-3 md:gap-4">
               <div className="bg-muted rounded-2xl p-4 md:p-8 flex-1 aspect-square flex items-center justify-center min-h-[100px]">

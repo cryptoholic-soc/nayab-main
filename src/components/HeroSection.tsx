@@ -1,4 +1,36 @@
 import { Button } from "@/components/ui/button";
+import { useTextScramble } from "@/hooks/use-text-scramble";
+
+const ScrambleButton = ({ 
+  children, 
+  variant = "default", 
+  size = "default", 
+  className = "",
+  ...props 
+}: { 
+  children: string; 
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "accent";
+  size?: "default" | "sm" | "lg" | "icon";
+  className?: string;
+  [key: string]: any;
+}) => {
+  const { displayText, scramble, reset } = useTextScramble(children, {
+    revealSpeed: 30,
+  });
+
+  return (
+    <Button
+      variant={variant}
+      size={size}
+      className={className}
+      onMouseEnter={scramble}
+      onMouseLeave={reset}
+      {...props}
+    >
+      {displayText}
+    </Button>
+  );
+};
 
 const HeroSection = () => {
   return (
@@ -19,12 +51,12 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-wrap items-center gap-4">
-              <Button variant="default" size="lg">
+              <ScrambleButton variant="default" size="lg">
                 Coming Soon
-              </Button>
-              <Button variant="link" className="text-foreground">
+              </ScrambleButton>
+              <ScrambleButton variant="link" className="text-foreground">
                 Explore Marketplace
-              </Button>
+              </ScrambleButton>
             </div>
           </div>
           
@@ -41,12 +73,11 @@ const HeroSection = () => {
                   msUserSelect: 'none',
                   pointerEvents: 'none',
                   WebkitTouchCallout: 'none',
-                  WebkitUserDrag: 'none',
+                  ...({ WebkitUserDrag: 'none' } as React.CSSProperties),
                   KhtmlUserSelect: 'none'
                 }}
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
-                onSelectStart={(e) => e.preventDefault()}
                 draggable={false}
               />
             </div>

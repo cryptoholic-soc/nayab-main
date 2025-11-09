@@ -1,4 +1,77 @@
 import { Button } from "@/components/ui/button";
+import { useTextScramble } from "@/hooks/use-text-scramble";
+
+const ScrambleButton = ({ 
+  children, 
+  variant = "default", 
+  size = "default", 
+  className = "",
+  asChild = false,
+  ...props 
+}: { 
+  children: string; 
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "accent";
+  size?: "default" | "sm" | "lg" | "icon";
+  className?: string;
+  asChild?: boolean;
+  [key: string]: any;
+}) => {
+  const { displayText, scramble, reset } = useTextScramble(children, {
+    revealSpeed: 30,
+  });
+
+  return (
+    <Button
+      variant={variant}
+      size={size}
+      className={className}
+      asChild={asChild}
+      onMouseEnter={scramble}
+      onMouseLeave={reset}
+      {...props}
+    >
+      {asChild ? children : displayText}
+    </Button>
+  );
+};
+
+const ScrambleLink = ({ 
+  children, 
+  href = "#",
+  variant = "outline",
+  size = "lg",
+  className = "",
+  target,
+  rel,
+  ...props 
+}: { 
+  children: string; 
+  href?: string;
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "accent";
+  size?: "default" | "sm" | "lg" | "icon";
+  className?: string;
+  target?: string;
+  rel?: string;
+  [key: string]: any;
+}) => {
+  const { displayText, scramble, reset } = useTextScramble(children, {
+    revealSpeed: 30,
+  });
+
+  return (
+    <Button asChild variant={variant} size={size} className={className} {...props}>
+      <a 
+        href={href}
+        target={target}
+        rel={rel}
+        onMouseEnter={scramble}
+        onMouseLeave={reset}
+      >
+        {displayText}
+      </a>
+    </Button>
+  );
+};
 
 const CTASection = () => {
   return (
@@ -11,14 +84,18 @@ const CTASection = () => {
           Be part of the future where users own their data, content, and value. We provide transparency and accessibility.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          <Button variant="default" size="lg">
+          <ScrambleButton variant="default" size="lg">
             Coming Soon
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <a href="https://forms.gle/pZQmEdSEnZv2mHuX7" target="_blank" rel="noopener noreferrer">
-              Join the waitlist
-            </a>
-          </Button>
+          </ScrambleButton>
+          <ScrambleLink 
+            href="https://forms.gle/pZQmEdSEnZv2mHuX7" 
+            variant="outline" 
+            size="lg"
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            Join the waitlist
+          </ScrambleLink>
         </div>
       </div>
     </section>

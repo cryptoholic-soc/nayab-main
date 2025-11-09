@@ -1,4 +1,36 @@
 import { Button } from "@/components/ui/button";
+import { useTextScramble } from "@/hooks/use-text-scramble";
+
+const ScrambleButton = ({ 
+  children, 
+  variant = "default", 
+  size = "default", 
+  className = "",
+  ...props 
+}: { 
+  children: string; 
+  variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "accent";
+  size?: "default" | "sm" | "lg" | "icon";
+  className?: string;
+  [key: string]: any;
+}) => {
+  const { displayText, scramble, reset } = useTextScramble(children, {
+    revealSpeed: 30,
+  });
+
+  return (
+    <Button
+      variant={variant}
+      size={size}
+      className={className}
+      onMouseEnter={scramble}
+      onMouseLeave={reset}
+      {...props}
+    >
+      {displayText}
+    </Button>
+  );
+};
 
 const Header = () => {
   return (
@@ -17,7 +49,7 @@ const Header = () => {
           </nav>
           
           <div className="flex items-center gap-3">
-            <Button 
+            <ScrambleButton 
               variant="outline" 
               size="sm"
               onClick={() => {
@@ -30,10 +62,10 @@ const Header = () => {
               }}
             >
               Whitepaper
-            </Button>
-            <Button variant="default" size="sm">
-             Coming Soon
-            </Button>
+            </ScrambleButton>
+            <ScrambleButton variant="default" size="sm">
+              Coming Soon
+            </ScrambleButton>
           </div>
         </div>
       </div>
