@@ -85,9 +85,10 @@ const Footer = () => {
           <h1
             className={`font-black uppercase tracking-tight leading-none relative z-10 transition-all duration-700 ${
               isExpanded
-                ? "text-[12rem] md:text-[16rem]"
+                ? "text-[15rem] md:text-[19rem] lg:text-[20rem]"
                 : "text-6xl md:text-8xl"
             }`}
+            style={{ fontFamily: "'Tricked', sans-serif" }}
           >
             <span className="relative inline-block">
               NAYAB
@@ -197,6 +198,15 @@ const Footer = () => {
       )}
 
       <style>{`
+        /* Custom Font - Tricked */
+        @font-face {
+          font-family: 'Tricked';
+          src: url('/Tricked.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+          font-display: swap;
+        }
+
         /* Grid Pattern */
         .grid-pattern {
           background-image: 
@@ -220,8 +230,8 @@ const Footer = () => {
         /* Floating Particles */
         .particle {
           position: absolute;
-          width: 2px;
-          height: 2px;
+          width: 4px;
+          height: 4px;
           background: white;
           border-radius: 50%;
           opacity: 0.3;
@@ -322,7 +332,7 @@ const Footer = () => {
         }
         
         .scrolling-text {
-          animation: scroll 30s linear infinite;
+          animation: scroll 7s linear infinite;
         }
         
         .scrolling-text:hover {
