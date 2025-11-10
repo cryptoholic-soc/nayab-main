@@ -57,7 +57,7 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              Building a marketplace that flips the rule - where users are owners
+              A marketplace that flips the rule - where users are owners
             </h1>
             
             <p className="text-lg text-muted-foreground max-w-lg">
