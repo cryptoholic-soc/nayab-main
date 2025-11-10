@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useTextScramble } from "@/hooks/use-text-scramble";
+import { useState } from "react";
 
 const ScrambleButton = ({ 
   children, 
@@ -33,6 +34,19 @@ const ScrambleButton = ({
 };
 
 const HeroSection = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  const imageStyle = {
+    userSelect: 'none' as const,
+    WebkitUserSelect: 'none' as const,
+    MozUserSelect: 'none' as const,
+    msUserSelect: 'none' as const,
+    pointerEvents: 'none' as const,
+    WebkitTouchCallout: 'none' as const,
+    WebkitUserDrag: 'none' as const,
+    KhtmlUserSelect: 'none' as const,
+  };
+
   return (
     <section className="pt-32 pb-20 px-6">
       <div className="container mx-auto">
@@ -61,21 +75,31 @@ const HeroSection = () => {
           </div>
           
           <div className="relative">
-            <div className="bg-muted/50 rounded-3xl p-8 aspect-square flex items-center justify-center">
+            <div 
+              className="bg-muted/50 rounded-3xl p-8 aspect-square flex items-center justify-center relative overflow-hidden cursor-pointer group"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              {/* Base image */}
               <img 
                 src="/mockup.png" 
                 alt="Mobile App Mockup" 
-                className="max-w-full max-h-full object-contain rounded-2xl select-none pointer-events-none"
-                style={{
-                  userSelect: 'none',
-                  WebkitUserSelect: 'none',
-                  MozUserSelect: 'none',
-                  msUserSelect: 'none',
-                  pointerEvents: 'none',
-                  WebkitTouchCallout: 'none',
-                  ...({ WebkitUserDrag: 'none' } as React.CSSProperties),
-                  KhtmlUserSelect: 'none'
-                }}
+                className={`max-w-full max-h-full object-contain rounded-2xl select-none pointer-events-none absolute inset-0 m-auto transition-opacity duration-500 ease-in-out ${
+                  isHovered ? 'opacity-0' : 'opacity-100'
+                }`}
+                style={imageStyle}
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                draggable={false}
+              />
+              {/* Hover image */}
+              <img 
+                src="/mockup1.png" 
+                alt="Mobile App Mockup Hover" 
+                className={`max-w-full max-h-full object-contain rounded-2xl select-none pointer-events-none absolute inset-0 m-auto transition-opacity duration-500 ease-in-out ${
+                  isHovered ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={imageStyle}
                 onContextMenu={(e) => e.preventDefault()}
                 onDragStart={(e) => e.preventDefault()}
                 draggable={false}
