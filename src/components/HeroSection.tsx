@@ -48,7 +48,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="pt-32 pb-20 px-6">
+    <section id="hero" className="pt-32 pb-20 px-6">
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">

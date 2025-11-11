@@ -1,6 +1,6 @@
 const FeaturesSection = () => {
   return (
-    <section className="py-20 px-6">
+    <section id="features" className="py-20 px-6">
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           <div className="bg-muted/30 rounded-3xl p-8 md:p-12 aspect-square flex items-center justify-center min-h-[300px] md:min-h-[400px]">

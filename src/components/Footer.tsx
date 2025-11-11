@@ -34,6 +34,7 @@ const Footer = () => {
 
   return (
     <footer
+      id="footer"
       ref={footerRef}
       className={`relative bg-black text-white overflow-hidden transition-all duration-700 ease-out ${
         isExpanded

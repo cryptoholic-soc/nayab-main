@@ -75,7 +75,7 @@ const ScrambleLink = ({
 
 const CTASection = () => {
   return (
-    <section className="py-20 px-6">
+    <section id="cta" className="py-20 px-6">
       <div className="container mx-auto text-center">
         <h2 className="text-4xl lg:text-5xl font-bold mb-4">
           Join the Revolution

@@ -34,7 +34,7 @@ const ScrambleButton = ({
 
 const HowItWorksSection = () => {
   return (
-    <section className="py-20 px-6 bg-background">
+    <section id="how-it-works" className="py-20 px-6 bg-background">
       <div className="container mx-auto">
         <h2 className="text-4xl lg:text-5xl font-bold text-center mb-16">
           How NAYAB Works
